@@ -8,7 +8,9 @@ WriteLine("Задайте длину массива: ");
 int arrLength = int.Parse(ReadLine());
 
 int[] array = MakeArray(arrLength);
+
 WriteLine("[{0}]", string.Join(", ", array));
+WriteLine();
 
 SumOddElements(array);
 
@@ -29,10 +31,10 @@ void SumOddElements(int[] array)
     int sum = 0;
     for (int i = 0; i < array.Length; i++)
     {
-        if (array[i] < 0)
+        if (i % 2 != 0)
         {
             sum = sum + array[i];
         }
     }
-    WriteLine($"Сумма отрицательных элеменотов массива: \n{sum}");
+    WriteLine($"Сумма элементов, стоящих на нечётных позициях: \n{sum}");
 }
