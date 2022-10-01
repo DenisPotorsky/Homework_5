@@ -1,11 +1,26 @@
 ﻿using static System.Console;
 Clear();
+
 //1. Задайте массив вещественных чисел. 
-//2. Найдите разницу между максимальным и минимальным элементов массива.
-// [3.5, 7.1, 22.9, 2.3, 78.5] -> 76.2
+//2. Найдите разницу между максимальным 
+//   и минимальным элементов массива.
+//   [3.5, 7.1, 22.9, 2.3, 78.5] -> 76.2
+
 WriteLine("Задайте длину массива: ");
 int arrLength = int.Parse(ReadLine());
 double[] array = MakeArray(arrLength);
+WriteLine("[{0}]", string.Join("; ", array));
+WriteLine();
+
+double min = SearchMin(array);
+WriteLine($"Минимальный элемент массива: \n{min}");
+WriteLine();
+
+double max = SearchMax(array);
+WriteLine($"Максимальный элемент массива: \n{max}");
+WriteLine();
+
+SearchDifference();
 
 double[] MakeArray(int size)
 {
@@ -14,20 +29,41 @@ double[] MakeArray(int size)
 
     for (int i = 0; i < size; i++)
     {
-        arr[i] = rnd.Next();
+        arr[i] = Math.Round((rnd.NextDouble() * 100), 1);
     }
     return arr;
 }
 
-void SearchDifferenceMinMax(int[] array)
+double SearchMin(double[] array)
 {
-    int result = 0;
-    for (int i = 0; i < array.Length; i++)
+    double min = array[0];
+
+    for (int i = 0; i < array.Length; ++i)
     {
-        if (array[i] % 2 == 0)
+        if (array[i] < min)
         {
-            counter++;
+            min = array[i];
         }
     }
-    WriteLine($"Количество четных элементов массива: \n{result}");
+    return min;
+}
+
+double SearchMax(double[] array)
+{
+    double max = array[0];
+
+    for (int i = 0; i < array.Length; ++i)
+    {
+        if (array[i] > max)
+        {
+            max = array[i];
+        }
+    }
+    return max;
+}
+
+void SearchDifference()
+{
+    double result = max - min;
+    WriteLine($"Разница между максимальным и минимальным элементами массива: \n{Math.Round(result, 1)}");
 }
